@@ -52,13 +52,8 @@ public class PromotionController {
         int data = 10;
         List<SimplePromotionDto> simpleList = new ArrayList<>();
         for(int i = 0; i <= data; i++){
-            SimplePromotionDto simple = new SimplePromotionDto(i);
-            simple.setAnimalNo(i);
-            simple.setTitle("사지말고 입양하세요" + i);
-            simple.setName("초코" + i);
-            simple.setGender("암컷");
-            simple.setAge(1 + i);
-            simple.setKind("고양이");
+            SimplePromotionDto simple = new SimplePromotionDto(i, i,"사지말고 입양하세요" + i,
+                                                        "초코" + i, "암컷", 1 + i, "고양이");
             simpleList.add(simple);
         }
 
