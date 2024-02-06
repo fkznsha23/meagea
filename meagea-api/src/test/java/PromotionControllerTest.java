@@ -1,4 +1,3 @@
-package test;
 
 import controller.PromotionController;
 import dto.PromotionForm;

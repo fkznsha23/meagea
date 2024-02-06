@@ -47,7 +47,7 @@ public class PromotionController {
         return pro;
     }
 
-    @GetMapping("/all-promotion")
+    @GetMapping("/all-promotion-title")
     public List<SimplePromotionDto> getAllPromotion() {
         int data = 10;
         List<SimplePromotionDto> simpleList = new ArrayList<>();
