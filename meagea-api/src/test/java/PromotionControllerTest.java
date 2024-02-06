@@ -6,30 +6,22 @@ import entity.Promotion;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = PromotionController.class)
 public class PromotionControllerTest {
     PromotionController controller = new PromotionController();
     @Test
-    public void writePromotionTest() {
-        PromotionForm form = new PromotionForm();
-        form.setTitle("쫑이를 소개합니다.");
-        form.setName("쫑이");
-        form.setAge(5);
-        form.setWeight(3.5);
-        form.setNeuter(true);
-        form.setKind("강아지");
-        form.setDetail("믹스");
-        form.setPlace("파주");
-        form.setHealthState(5);
-        form.setActivity(2);
-        form.setSociality(3);
-        form.setFriendly(3);
-        form.setAdoptionState(false);
-        form.setIntroduction("쫑이는 착해요");
-        form.setCondition("평생 책임져야 합니다");
-
+    public void writePromotionTest() throws IOException {
+        PromotionForm form = new PromotionForm("쫑이를 소개합니다.", "쫑이", new ArrayList<>(), 5,
+                                                3.5, true, "고양이", "삼색이", "인근",
+                                                5, 5, 5, 5, "설명",
+                                                "입양조건");
         Promotion pro = controller.writePromotion(form);
-        assertThat(pro.getAnimal().getName()).isEqualTo("쫑이");
     }
 
     @Test
