@@ -1,4 +1,4 @@
-package com.project.meagea;
+package test;
 
 import controller.PromotionController;
 import dto.PromotionForm;
@@ -6,11 +6,6 @@ import dto.SimplePromotionDto;
 import entity.Promotion;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 public class PromotionControllerTest {

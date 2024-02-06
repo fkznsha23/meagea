@@ -13,10 +13,10 @@ java {
 	sourceCompatibility = '17' // 자바 버전 명시
 }
 
-repositories {
-	mavenCentral()
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'	// 웹 개발과 관련된 모든 의존성
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+repositories {
+	mavenCentral()
 }
