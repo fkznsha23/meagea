@@ -1,1 +1,5 @@
 rootProject.name = 'meagea'
+include 'meagea-domain'
+include 'meagea-api'
+include 'meagea-batch'
+
