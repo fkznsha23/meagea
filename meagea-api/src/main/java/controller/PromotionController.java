@@ -35,7 +35,8 @@ public class PromotionController {
         Animal animal = new Animal(form.getName(), form.getAge(), form.getWeight(), form.isNeuter(), form.getKind(),
                                    form.getDetail(), form.getPlace(), form.getHealthState(), form.getActivity(),
                                    form.getSociality(),form.getFriendly());
-        Promotion pro = new Promotion(10, animal.getNo(), form.getIntroduction(), form.getCondition(), fileNoList);
+        Promotion pro = new Promotion(10, form.getTitle(), animal.getNo(), form.getIntroduction(),
+                                        form.getCondition(), fileNoList);
 
         return pro;
     }
@@ -43,11 +44,11 @@ public class PromotionController {
     @GetMapping("meagea/promotion/{no}")
     public Promotion getPromotion(int no){
 
-        return new Promotion(no,1, "설명", "입양조건", new ArrayList<Integer>());
+        return new Promotion(no,"제목", 1, "설명", "입양조건", new ArrayList<Integer>());
     }
 
     @GetMapping("meagea/all-promotion-title")
-    public List<SimplePromotionDto> getAllPromotion() {
+    public List<SimplePromotionDto> getAllPromotionTitle() {
         int data = 10;
         List<SimplePromotionDto> simpleList = new ArrayList<>();
         for(int i = 0; i <= data; i++){

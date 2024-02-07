@@ -11,8 +11,9 @@ public class Promotion {
     // 입양 홍보 게시글 정보
 
 
-    public Promotion(int no, int animalNo, String introduction, String condition, List<Integer> fileNoList) {
+    public Promotion(int no, String title, int animalNo, String introduction, String condition, List<Integer> fileNoList) {
         this.no = no;
+        this.title = title;
         this.animalNo = animalNo;
         this.introduction = introduction;
         this.condition = condition;
@@ -25,6 +26,7 @@ public class Promotion {
 
     private int no;
     private int animalNo;
+    private String title;
     private String introduction;
     private String condition;
     private List<Integer> adoptionFormNoList;
