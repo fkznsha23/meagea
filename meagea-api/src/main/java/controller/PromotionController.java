@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 public class PromotionController {
-    @PostMapping("/promotion")
+    @PostMapping("meagea/promotion")
     public Promotion writePromotion(@RequestBody PromotionForm form) throws IOException {
         List<MultipartFile> multiList = new ArrayList<>();
         form = new PromotionForm("제목", "머핀", multiList, 4, 3.5, true, "고양이",
@@ -35,17 +35,18 @@ public class PromotionController {
         Animal animal = new Animal(form.getName(), form.getAge(), form.getWeight(), form.isNeuter(), form.getKind(),
                                    form.getDetail(), form.getPlace(), form.getHealthState(), form.getActivity(),
                                    form.getSociality(),form.getFriendly());
-        Promotion pro = new Promotion(animal.getNo(), form.getIntroduction(), form.getCondition(), fileNoList);
+        Promotion pro = new Promotion(10, animal.getNo(), form.getIntroduction(), form.getCondition(), fileNoList);
 
         return pro;
     }
 
-    @GetMapping("/promotion")
+    @GetMapping("meagea/promotion/{no}")
     public Promotion getPromotion(int no){
-        return new Promotion(1, "설명", "입양조건", new ArrayList<Integer>());
+
+        return new Promotion(no,1, "설명", "입양조건", new ArrayList<Integer>());
     }
 
-    @GetMapping("/all-promotion-title")
+    @GetMapping("meagea/all-promotion-title")
     public List<SimplePromotionDto> getAllPromotion() {
         int data = 10;
         List<SimplePromotionDto> simpleList = new ArrayList<>();
