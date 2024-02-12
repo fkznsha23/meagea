@@ -18,11 +18,7 @@ import java.util.List;
 public class PromotionController {
     @PostMapping("/promotion")
     public Promotion writePromotion(@RequestBody PromotionForm form) throws IOException {
-//        List<MultipartFile> multiList = new ArrayList<>();
-//        form = new PromotionForm("제목", "머핀", multiList, 4, 3.5, true, "고양이",
-//                                "삼색이", "인근 슈퍼 앞", 5, 5, 3, 5,
-//                                "귀엽습니다.", "집을 많이 비우시는 분은 안됩니다.");
-
+        System.out.println("흠");
         List<Integer> fileNoList = new ArrayList<>();
         AnimalFileManager fileMan = new AnimalFileManager();
         for(MultipartFile m : form.getMultipartFileList()) {

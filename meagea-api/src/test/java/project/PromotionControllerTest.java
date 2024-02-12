@@ -1,31 +1,45 @@
-import project.controller.PromotionController;
-import project.dto.PromotionForm;
-import project.dto.SimplePromotionDto;
+package project;
+
 import entity.Promotion;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import project.dto.PromotionForm;
+import project.dto.SimplePromotionDto;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = PromotionController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PromotionControllerTest {
+    //private final String URI = "http://localhost:" + 8080 + "/meagea";
+    @Autowired
+    TestRestTemplate testRestTemplate;
 
-    private final String URI = "http://localhost:" + 8080 + "/meagea/";
-    TestRestTemplate testRestTemplate = new TestRestTemplate();
     @Test
     public void writePromotionTest() throws IOException {
-        String url = URI + "promotion";
+        String url = "/meagea/promotion";
         List<MultipartFile> multiList = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {
+            String name = "file" + i;
+            String type = "jpg";
+            String path = "C:\\workspace\\ij-workspace\\meagea\\src\\main\\resources\\image";
+            FileInputStream input = new FileInputStream(path);
+            MockMultipartFile mock = new MockMultipartFile(name, name + "." + type, type, input);
+            multiList.add(mock);
+        }
+
         PromotionForm form = new PromotionForm("제목", "머핀", multiList, 4, 3.5, true,
                                                 "고양이", "삼색이", "인근 슈퍼 앞", 5,
                                                 5, 3, 5,
@@ -37,14 +51,14 @@ public class PromotionControllerTest {
 
     @Test
     public void getPromotionTest(){
-        String url = URI + "promotion/" + 10;
+        String url = "/meagea/promotion/" + 10;
         Promotion pro = testRestTemplate.getForObject(url, Promotion.class);
         assertThat(pro.getNo()).isEqualTo(10);
     }
 
     @Test
     public void getAllPromotionTitleTest(){
-        String url = URI + "all-promotion-title";
+        String url = "/meagea/all-promotion-title";
         ResponseEntity<List<SimplePromotionDto>> responseEntity =
                 testRestTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<SimplePromotionDto>>() {});

@@ -28,6 +28,8 @@ public class PromotionForm {
         this.condition = condition;
     }
 
+    public PromotionForm(){}
+
     private String title;
     private String name;
     private List<MultipartFile> MultipartFileList;
