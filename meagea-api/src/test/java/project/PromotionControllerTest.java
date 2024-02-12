@@ -34,7 +34,7 @@ public class PromotionControllerTest {
         for(int i = 0; i < 4; i++) {
             String name = "file" + i;
             String type = "jpg";
-            String path = "C:\\workspace\\ij-workspace\\meagea\\src\\main\\resources\\image";
+            String path = "C:/workspace/ij-workspace/meagea/meagea-api/src/main/java/project/image";
             FileInputStream input = new FileInputStream(path);
             MockMultipartFile mock = new MockMultipartFile(name, name + "." + type, type, input);
             multiList.add(mock);
