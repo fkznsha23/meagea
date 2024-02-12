@@ -11,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+java {
+    sourceCompatibility = '17' // 자바 버전 명시
+}
+
 dependencies {
     implementation project(':meagea-domain')
     implementation 'org.springframework.boot:spring-boot-starter-web'	// 웹 개발과 관련된 모든 의존성

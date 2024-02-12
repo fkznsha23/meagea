@@ -1,4 +1,4 @@
-package entity;
+package project.api;
 
 import org.springframework.web.multipart.MultipartFile;
 

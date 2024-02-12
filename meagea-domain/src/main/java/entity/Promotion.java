@@ -9,8 +9,6 @@ import java.util.List;
 @Getter
 public class Promotion {
     // 입양 홍보 게시글 정보
-
-
     public Promotion(int no, String title, int animalNo, String introduction, String condition, List<Integer> fileNoList) {
         this.no = no;
         this.title = title;
@@ -23,6 +21,8 @@ public class Promotion {
         this.adoptionFormNoList = new ArrayList<>();
         this.diaryNoList = new ArrayList<>();
     }
+
+    public Promotion(){}
 
     private int no;
     private int animalNo;

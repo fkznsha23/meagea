@@ -1,4 +1,4 @@
-package dto;
+package project.dto;
 
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
