@@ -17,11 +17,10 @@ import java.util.List;
 @RequestMapping("/meagea")
 public class PromotionController {
     @PostMapping("/promotion")
-    public Promotion writePromotion(@RequestBody PromotionForm form) throws IOException {
-        System.out.println("흠");
+    public Promotion writePromotion(@RequestParam PromotionForm form) throws IOException {
         List<Integer> fileNoList = new ArrayList<>();
         AnimalFileManager fileMan = new AnimalFileManager();
-        for(MultipartFile m : form.getMultipartFileList()) {
+        for(MultipartFile m : form.getMultiList()) {
             AnimalFile animalFile = new AnimalFile(m.getOriginalFilename(), fileMan.serverFile(m));
             fileNoList.add(animalFile.getNo());
         }
@@ -34,13 +33,12 @@ public class PromotionController {
                                         form.getCondition(), fileNoList);
     }
 
-    @GetMapping("/meagea/promotion/{no}")
-    public Promotion getPromotion(int no){
-
-        return new Promotion(no,"제목", 1, "설명", "입양조건", new ArrayList<Integer>());
+    @GetMapping("/promotion/{no}")
+    public Promotion getPromotion(@PathVariable int no){
+        return new Promotion(no,"제목", 1, "설명", "입양조건", new ArrayList<>());
     }
 
-    @GetMapping("/meagea/all-promotion-title")
+    @GetMapping("/all-promotion-title")
     public List<SimplePromotionDto> getAllPromotionTitle() {
         int data = 10;
         List<SimplePromotionDto> simpleList = new ArrayList<>();

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import project.dto.PromotionForm;
 import project.dto.SimplePromotionDto;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PromotionControllerTest {
-    //private final String URI = "http://localhost:" + 8080 + "/meagea";
     @Autowired
-    TestRestTemplate testRestTemplate;
+    TestRestTemplate testRestTemplate = new TestRestTemplate();
 
     @Test
     public void writePromotionTest() throws IOException {
@@ -34,10 +35,17 @@ public class PromotionControllerTest {
         for(int i = 0; i < 4; i++) {
             String name = "file" + i;
             String type = "jpg";
-            String path = "C:/workspace/ij-workspace/meagea/meagea-api/src/main/java/project/image";
-            FileInputStream input = new FileInputStream(path);
-            MockMultipartFile mock = new MockMultipartFile(name, name + "." + type, type, input);
+            String path = "src\\main\\java\\project\\image\\" + name + "." + type;
+            // path 경로에 있는 name.type 파일을 File 객체로 생성
+            File file = new File(path);
+            // 해당 파일을 바이트 단위로 읽어온다
+            FileSystemResource resource = new FileSystemResource(file);
+            FileInputStream input = new FileInputStream(file);
+            byte[] byteArr = input.readAllBytes();
+            // 파일 객체를 멀티파일 객체로 변환
+            MockMultipartFile mock = new MockMultipartFile(name, name + "." + type, type, byteArr);
             multiList.add(mock);
+            input.close();
         }
 
         PromotionForm form = new PromotionForm("제목", "머핀", multiList, 4, 3.5, true,
