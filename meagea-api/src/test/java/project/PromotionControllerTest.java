@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import project.dto.SimplePromotionDto;
@@ -43,25 +44,14 @@ public class PromotionControllerTest {
         map.add("introduction", "귀여움");
         map.add("condition", "집 좋아하시는 분");
         for(int i = 0; i < 4; i++) {
-            String name = "file" + i;
-            String type = "jpg";
-            String path = "src\\main\\java\\project\\image\\" + name + "." + type;
             // path 경로에 있는 name.type 파일을 File 객체로 생성
-            File file = new File(path);
-//            FileInputStream input = new FileInputStream(file);
-//            byte[] byteArr = input.readAllBytes();
-//            MockMultipartFile mock = new MockMultipartFile(name, name + "." + type, type, byteArr);
-//            ByteArrayResource resource = new ByteArrayResource(mock.getBytes());
+            File file = new File("src\\main\\java\\project\\image\\" + "file" + i + ".jpg");
             FileSystemResource resource = new FileSystemResource(file);
             map.add("imageList", resource);
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map, headers);
-
         String url = "/meagea/promotion";
-        ResponseEntity<Promotion> responseEntity = testRestTemplate.postForEntity(url, entity, Promotion.class);
+        ResponseEntity<Promotion> responseEntity = testRestTemplate.postForEntity(url, map, Promotion.class);
         Promotion pro = responseEntity.getBody();
         Assertions.assertThat(pro.getIntroduction()).isEqualTo("귀여움");
     }

@@ -17,11 +17,10 @@ import java.util.List;
 @RequestMapping("/meagea")
 public class PromotionController {
     @PostMapping("/promotion")
-    public Promotion writePromotion(@ModelAttribute PromotionForm form,
-                                    @RequestPart("imageList")List<MultipartFile> imageList) throws IOException {
+    public Promotion writePromotion(@ModelAttribute PromotionForm form) throws IOException {
         List<Integer> fileNoList = new ArrayList<>();
         AnimalFileManager fileMan = new AnimalFileManager();
-        for(MultipartFile m : imageList) {
+        for(MultipartFile m : form.getImageList()) {
             AnimalFile animalFile = new AnimalFile(m.getOriginalFilename(), fileMan.serverFile(m));
             fileNoList.add(animalFile.getNo());
         }

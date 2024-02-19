@@ -22,8 +22,6 @@ public class Promotion {
         this.diaryNoList = new ArrayList<>();
     }
 
-    public Promotion(){}
-
     private int no;
     private int animalNo;
     private String title;
