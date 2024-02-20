@@ -26,7 +26,7 @@ public class PromotionControllerTest {
     TestRestTemplate testRestTemplate = new TestRestTemplate();
 
     @Test
-    public void writePromotionTest() throws IOException {
+    public void 입양_홍보글_생성() throws IOException {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("title", "제목");
         map.add("name", "머핀");
@@ -58,14 +58,14 @@ public class PromotionControllerTest {
 
 
     @Test
-    public void getPromotionTest(){
+    public void 입양_홍보글_특정_조회(){
         String url = "/meagea/promotion/" + 10;
         Promotion pro = testRestTemplate.getForObject(url, Promotion.class);
         assertThat(pro.getNo()).isEqualTo(10);
     }
 
     @Test
-    public void getAllPromotionTitleTest(){
+    public void 모든_입양_홍보글_간단_조회(){
         String url = "/meagea/all-promotion-title";
         ResponseEntity<List<SimplePromotionDto>> responseEntity =
                 testRestTemplate.exchange(url, HttpMethod.GET, null,

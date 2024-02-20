@@ -5,7 +5,7 @@ import entity.AnimalFile;
 import entity.Promotion;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import project.api.AnimalFileManager;
+import project.unit.AnimalFileManager;
 import project.dto.PromotionForm;
 import project.dto.SimplePromotionDto;
 
