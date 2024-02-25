@@ -1,7 +1,6 @@
 package project;
 
 import entity.Promotion;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +8,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -52,15 +52,18 @@ public class PromotionControllerTest {
 
         String url = "/meagea/promotion";
         ResponseEntity<Promotion> responseEntity = testRestTemplate.postForEntity(url, map, Promotion.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Promotion pro = responseEntity.getBody();
-        Assertions.assertThat(pro.getIntroduction()).isEqualTo("귀여움");
+        assertThat(pro.getIntroduction()).isEqualTo("귀여움");
     }
 
 
     @Test
     public void 입양_홍보글_특정_조회(){
         String url = "/meagea/promotion/" + 10;
-        Promotion pro = testRestTemplate.getForObject(url, Promotion.class);
+        ResponseEntity<Promotion> responseEntity = testRestTemplate.getForEntity(url, Promotion.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Promotion pro = responseEntity.getBody();
         assertThat(pro.getNo()).isEqualTo(10);
     }
 
